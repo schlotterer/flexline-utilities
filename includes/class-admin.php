@@ -3,18 +3,13 @@ namespace FlexLine_Utilities;
 
 class Admin {
     public static function init() {
-        add_action(
-            'admin_menu',
-            function () {
-                add_submenu_page(
-                    'flexline_theme_options',
-                    'FlexLine Utilities',
-                    'FlexLine Utilities',
-                    'manage_options',
-                    'flexline-utilities',
-                    [ __CLASS__, 'render_page' ]
-                );
-            }
+        add_submenu_page(
+            'flexline_theme_options',
+            'FlexLine Utilities',
+            'FlexLine Utilities',
+            'manage_options',
+            'flexline-utilities',
+            [ __CLASS__, 'render_page' ]
         );
     }
 
