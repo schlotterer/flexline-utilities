@@ -32,6 +32,8 @@ require_once FLEXLINE_UTILITIES_PLUGIN_DIR . 'includes/class-admin.php';
 require_once FLEXLINE_UTILITIES_PLUGIN_DIR . 'includes/class-shortcodes.php';
 require_once FLEXLINE_UTILITIES_PLUGIN_DIR . 'includes/class-utilities.php';
 
+// Hook admin menu.
+add_action( 'admin_menu', [ FlexLine_Utilities\Admin::class, 'init' ] );
 
 // Activation and deactivation hooks.
 register_activation_hook(__FILE__, 'FlexLine_Utilities\activate');
@@ -56,7 +58,6 @@ add_action('plugins_loaded', 'FlexLine_Utilities\init');
 
 function init() {
     Shortcodes::init();
-    Admin::init();
     add_action('wp_enqueue_scripts', 'FlexLine_Utilities\enqueue_scripts');
 }
 
