@@ -6,6 +6,7 @@ class Shortcodes {
     public static function init() {
         add_shortcode( 'flexline_copyright_year', array( __CLASS__, 'flexline_copyright_year_shortcode' ) );
         add_shortcode( 'flexline_docs', array( __CLASS__, 'flexline_docs_shortcode' ) );
+        add_shortcode( 'flexline_theme_docs', array( __CLASS__, 'flexline_theme_docs_shortcode' ) );
         add_shortcode( 'flexline_site_name', array( __CLASS__, 'flexline_site_name_shortcode' ) );
         add_shortcode( 'flexline_page_title', array( __CLASS__, 'flexline_page_title_shortcode' ) );
     }
@@ -57,6 +58,22 @@ class Shortcodes {
         $flexline_docs = '';
 
         return $flexline_docs;
+    }
+
+    /**
+     * Shortcode to display the FlexLine theme documentation tab.
+     *
+     * @return string Documentation tab markup or empty string if unavailable.
+     */
+    public static function flexline_theme_docs_shortcode() {
+        if ( ! function_exists( 'FlexLine\\flexline_render_documentation_tab' ) ) {
+            return '';
+        }
+
+        ob_start();
+        \FlexLine\flexline_render_documentation_tab();
+
+        return ob_get_clean();
     }
 
     /**
