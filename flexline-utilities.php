@@ -28,6 +28,7 @@ define('FLEXLINE_UTILITIES_VERSION', '1.0.0');
 define('FLEXLINE_UTILITIES_PLUGIN_DIR', plugin_dir_path(__FILE__));
 
 // Include required files.
+require_once FLEXLINE_UTILITIES_PLUGIN_DIR . 'includes/class-admin.php';
 require_once FLEXLINE_UTILITIES_PLUGIN_DIR . 'includes/class-shortcodes.php';
 require_once FLEXLINE_UTILITIES_PLUGIN_DIR . 'includes/class-utilities.php';
 
@@ -55,6 +56,7 @@ add_action('plugins_loaded', 'FlexLine_Utilities\init');
 
 function init() {
     Shortcodes::init();
+    Admin::init();
     add_action('wp_enqueue_scripts', 'FlexLine_Utilities\enqueue_scripts');
 }
 
