@@ -48,12 +48,11 @@ class Shortcodes {
     }
 
     /**
-     * Shortcode to display the main phone number with optional custom link and text.
+     * Shortcode to display a link to Flexline documentation.
      *
-     * @param array $atts Shortcode attributes - 'link' for custom URL, 'text' for custom link text.
-     * @return string HTML content for the phone number link.
+     * @return string HTML content for the docs link.
      */
-    public static function flexline_doc_shortcode( ) {
+    public static function flexline_docs_shortcode() {
         $flexline_docs = '';
 
         return $flexline_docs;
