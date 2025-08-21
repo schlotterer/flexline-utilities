@@ -5,7 +5,6 @@ class Shortcodes {
 
     public static function init() {
         add_shortcode( 'flexline_copyright_year', array( __CLASS__, 'flexline_copyright_year_shortcode' ) );
-        add_shortcode( 'flexline_docs', array( __CLASS__, 'flexline_docs_shortcode' ) );
         add_shortcode( 'flexline_theme_docs', array( __CLASS__, 'flexline_theme_docs_shortcode' ) );
         add_shortcode( 'flexline_site_name', array( __CLASS__, 'flexline_site_name_shortcode' ) );
         add_shortcode( 'flexline_page_title', array( __CLASS__, 'flexline_page_title_shortcode' ) );
