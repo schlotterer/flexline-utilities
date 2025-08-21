@@ -28,8 +28,8 @@ define('FLEXLINE_UTILITIES_VERSION', '1.0.0');
 define('FLEXLINE_UTILITIES_PLUGIN_DIR', plugin_dir_path(__FILE__));
 
 // Include required files.
-require_once WEB4SL_PLUGIN_DIR . 'includes/class-shortcodes.php';
-require_once WEB4SL_PLUGIN_DIR . 'includes/class-utilities.php';
+require_once FLEXLINE_UTILITIES_PLUGIN_DIR . 'includes/class-shortcodes.php';
+require_once FLEXLINE_UTILITIES_PLUGIN_DIR . 'includes/class-utilities.php';
 
 
 // Activation and deactivation hooks.
