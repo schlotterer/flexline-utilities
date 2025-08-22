@@ -27,31 +27,28 @@ class Admin {
             <?php
             $shortcodes = array(
                 array(
-                    'title'       => 'Copyright Year',
-                    'description' => 'Displays the current year or a range from a starting year to the current year.',
-                    'attributes'  => 'starting_year, separator',
-                    'usage'       => array(
-                        '[flexline_copyright_year starting_year="2015"]',
-                        '[flexline_copyright_year]'
-                    ),
-                ),
-                array(
                     'title'       => 'Theme Documentation',
                     'description' => 'Renders the FlexLine theme documentation tab.',
-                    'attributes'  => '&mdash;',
                     'usage'       => '[flexline_theme_docs]',
-                ),
-                array(
-                    'title'       => 'Site Name',
-                    'description' => 'Outputs the site name.',
-                    'attributes'  => '&mdash;',
-                    'usage'       => '[flexline_site_name]',
                 ),
                 array(
                     'title'       => 'Page Title',
                     'description' => 'Outputs the current page title.',
-                    'attributes'  => '&mdash;',
                     'usage'       => '[flexline_page_title]',
+                ),
+                array(
+                    'title'       => 'Site Name',
+                    'description' => 'Outputs the site name.',
+                    'usage'       => '[flexline_site_name]',
+                ),
+                array(
+                    'title'       => 'Copyright Year',
+                    'description' => 'Displays the current year or a range from a starting year to the current year.',
+                    'usage'       => array(
+                        '[flexline_copyright_year]',
+                        '[flexline_copyright_year starting_year="2015"]',
+                        '[flexline_copyright_year starting_year="2010" separator=" - "]',
+                    ),
                 ),
             );
             ?>
@@ -60,7 +57,6 @@ class Admin {
                     <tr>
                         <th>Title</th>
                         <th>Description</th>
-                        <th>Attributes</th>
                         <th>Usage</th>
                     </tr>
                 </thead>
@@ -69,14 +65,18 @@ class Admin {
                     <tr>
                         <td><?php echo esc_html( $shortcode['title'] ); ?></td>
                         <td><?php echo esc_html( $shortcode['description'] ); ?></td>
-                        <td><?php echo esc_html( $shortcode['attributes'] ); ?></td>
-                        <td><code><?php
+                        <td><?php
                             $usage = $shortcode['usage'];
+                            $usage_output = '';
                             if ( is_array( $usage ) ) {
-                                $usage = implode( ', ', $usage );
+                                foreach ( $usage as $usage_item ) {
+                                    $usage_output .= '<code style="display: block; margin-bottom: 5px;">' . esc_html($usage_item) . '</code>';
+                                }
+                            }else{
+                                $usage_output = '<code>' . esc_html($usage) . '</code>';
                             }
-                            echo esc_html( $usage );
-                        ?></code></td>
+                            echo  $usage_output;
+                        ?></td>
                     </tr>
                 <?php endforeach; ?>
                 </tbody>
