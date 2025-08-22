@@ -9,11 +9,11 @@ class Admin {
 
     public static function add_admin_menu() {
         add_theme_page(
-            'FlexLine Utilities', 
-            'FlexLine Utilities', 
-            'manage_options', 
-            'flexline_utilities', 
-            'flexline_utilities_page'
+            'FlexLine Utilities',
+            'FlexLine Utilities',
+            'manage_options',
+            'flexline_utilities',
+            array(__CLASS__, 'render_page')
         );
         
     }
