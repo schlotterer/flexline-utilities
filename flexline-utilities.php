@@ -33,7 +33,8 @@ require_once FLEXLINE_UTILITIES_PLUGIN_DIR . 'includes/class-shortcodes.php';
 require_once FLEXLINE_UTILITIES_PLUGIN_DIR . 'includes/class-utilities.php';
 
 // Hook admin menu.
-add_action( 'admin_menu', [ FlexLine_Utilities\Admin::class, 'init' ] );
+add_action( 'admin_menu', [ Admin::class, 'init' ] );
+
 
 // Activation and deactivation hooks.
 register_activation_hook(__FILE__, 'FlexLine_Utilities\activate');
