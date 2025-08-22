@@ -27,47 +27,56 @@ class Admin {
             <?php
             $shortcodes = array(
                 array(
-                    'tag'         => 'flexline_copyright_year',
-                    'usage'       => '[flexline_copyright_year starting_year="2015"]',
+                    'title'       => 'Copyright Year',
                     'description' => 'Displays the current year or a range from a starting year to the current year.',
                     'attributes'  => 'starting_year, separator',
+                    'usage'       => array(
+                        '[flexline_copyright_year starting_year="2015"]',
+                        '[flexline_copyright_year]'
+                    ),
                 ),
                 array(
-                    'tag'         => 'flexline_theme_docs',
-                    'usage'       => '[flexline_theme_docs]',
+                    'title'       => 'Theme Documentation',
                     'description' => 'Renders the FlexLine theme documentation tab.',
                     'attributes'  => '&mdash;',
+                    'usage'       => '[flexline_theme_docs]',
                 ),
                 array(
-                    'tag'         => 'flexline_site_name',
-                    'usage'       => '[flexline_site_name]',
+                    'title'       => 'Site Name',
                     'description' => 'Outputs the site name.',
                     'attributes'  => '&mdash;',
+                    'usage'       => '[flexline_site_name]',
                 ),
                 array(
-                    'tag'         => 'flexline_page_title',
-                    'usage'       => '[flexline_page_title]',
+                    'title'       => 'Page Title',
                     'description' => 'Outputs the current page title.',
                     'attributes'  => '&mdash;',
+                    'usage'       => '[flexline_page_title]',
                 ),
             );
             ?>
             <table class="widefat fixed striped">
                 <thead>
                     <tr>
-                        <th>Shortcode</th>
-                        <th>Usage</th>
+                        <th>Title</th>
                         <th>Description</th>
                         <th>Attributes</th>
+                        <th>Usage</th>
                     </tr>
                 </thead>
                 <tbody>
                 <?php foreach ( $shortcodes as $shortcode ) : ?>
                     <tr>
-                        <td><code>[<?php echo esc_html( $shortcode['tag'] ); ?>]</code></td>
-                        <td><code><?php echo esc_html( $shortcode['usage'] ); ?></code></td>
+                        <td><?php echo esc_html( $shortcode['title'] ); ?></td>
                         <td><?php echo esc_html( $shortcode['description'] ); ?></td>
                         <td><?php echo esc_html( $shortcode['attributes'] ); ?></td>
+                        <td><code><?php
+                            $usage = $shortcode['usage'];
+                            if ( is_array( $usage ) ) {
+                                $usage = implode( ', ', $usage );
+                            }
+                            echo esc_html( $usage );
+                        ?></code></td>
                     </tr>
                 <?php endforeach; ?>
                 </tbody>
