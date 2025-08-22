@@ -25,13 +25,30 @@ Access theme options from the WordPress admin menu under 'Web4SL'. Customize set
 
 ### Shortcodes
 
+Shortcodes are small bits of text wrapped in square brackets that WordPress replaces with dynamic content. Add them directly to your post, page, or widget content where you want the output to appear.
+
 Use the following shortcodes in your posts, pages, or widgets:
 
+- **[flexline_copyright_year]** – Displays the current year or a range from a specific starting year to the current year.
+  - **Usage Examples:**
+    - `[flexline_copyright_year]`
+    - `[flexline_copyright_year starting_year="2015"]`
+    - `[flexline_copyright_year starting_year="2010" separator=" to "]`
+  - **Attributes:**
+    - `starting_year` (optional) – Beginning year of the range.
+    - `separator` (optional) – Text between the starting and current year. Default is ` - `.
 
-- **[flexline_copyright_year]** - Displays the current year or a range from a specific starting year to the current year.
-  - `[flexline_copyright_year]`
-  - `[flexline_copyright_year starting_year="2015"]`
-  - `[flexline_copyright_year starting_year="2010" separator=" to "]`
+- **[flexline_theme_docs]** – Displays the FlexLine theme documentation tab.
+  - **Usage:** `[flexline_theme_docs]`
+  - **Attributes:** None.
+
+- **[flexline_site_name]** – Outputs the site's name.
+  - **Usage:** `[flexline_site_name]`
+  - **Attributes:** None.
+
+- **[flexline_page_title]** – Outputs the current page title.
+  - **Usage:** `[flexline_page_title]`
+  - **Attributes:** None.
 
 
 ## Changelog
@@ -41,4 +58,4 @@ Use the following shortcodes in your posts, pages, or widgets:
 
 ## License
 
-This plugin is licensed under the MIT.# flexline-utilities
+This plugin is licensed under the MIT.
