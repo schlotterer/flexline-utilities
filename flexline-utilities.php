@@ -7,14 +7,17 @@
  * Author URI: https://FlexLineTheme.com
  * Text Domain: flexline
  * Domain Path: /languages
-
+ * Category: Utilities
+ * License: GPL3
+ * License URI: https://www.gnu.org/licenses/gpl-3.0.html
+ *
  * ███████╗██╗     ███████╗██╗  ██╗██╗     ██╗███╗   ██╗███████╗
  * ██╔════╝██║     ██╔════╝╚██╗██╔╝██║     ██║████╗  ██║██╔════╝
  * █████╗  ██║     █████╗   ╚███╔╝ ██║     ██║██╔██╗ ██║█████╗  
  * ██╔══╝  ██║     ██╔══╝   ██╔██╗ ██║     ██║██║╚██╗██║██╔══╝  
  * ██║     ███████╗███████╗██╔╝ ██╗███████╗██║██║ ╚████║███████╗
  * ╚═╝     ╚══════╝╚══════╝╚═╝  ╚═╝╚══════╝╚═╝╚═╝  ╚═══╝╚══════╝
-  
+ * 
  */
 
 namespace FlexLine_Utilities;
@@ -31,7 +34,9 @@ define('FLEXLINE_UTILITIES_PLUGIN_DIR', plugin_dir_path(__FILE__));
 require_once FLEXLINE_UTILITIES_PLUGIN_DIR . 'includes/class-admin.php';
 require_once FLEXLINE_UTILITIES_PLUGIN_DIR . 'includes/class-shortcodes.php';
 require_once FLEXLINE_UTILITIES_PLUGIN_DIR . 'includes/class-utilities.php';
-
+require_once FLEXLINE_UTILITIES_PLUGIN_DIR . 'includes/functions/get-logo-url.php';
+require_once FLEXLINE_UTILITIES_PLUGIN_DIR . 'includes/security.php';
+require_once FLEXLINE_UTILITIES_PLUGIN_DIR . 'includes/hooks/add-og-tags.php';
 
 // Activation and deactivation hooks.
 register_activation_hook(__FILE__, 'FlexLine_Utilities\activate');
@@ -54,6 +59,13 @@ function deactivate() {
 // Initialize plugin functionalities.
 add_action('plugins_loaded', 'FlexLine_Utilities\init');
 
+/**
+ * Initializes the plugin's admin and shortcode functionalities.
+ *
+ * Hooks into the `plugins_loaded` action hook.
+ *
+ * @since 1.0.0
+ */
 function init() {
     Admin::init();
     Shortcodes::init();

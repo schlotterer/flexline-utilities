@@ -1,13 +1,36 @@
 <?php
+
+/**
+ * Class containing shortcodes for FlexLine Utilities.
+ *
+ * Shortcodes are a special type of WordPress content that can be used to add
+ * custom functionality to your site. In this case, the shortcodes are used to
+ * add a copyright year to the footer and to add a link to the theme documentation.
+ *
+ * @package FlexLine_Utilities
+ */
+
 namespace FlexLine_Utilities;
 
-class Shortcodes {
+class Shortcodes
+{
 
-    public static function init() {
-        add_shortcode( 'flexline_copyright_year', array( __CLASS__, 'flexline_copyright_year_shortcode' ) );
-        add_shortcode( 'flexline_theme_docs', array( __CLASS__, 'flexline_theme_docs_shortcode' ) );
-        add_shortcode( 'flexline_site_name', array( __CLASS__, 'flexline_site_name_shortcode' ) );
-        add_shortcode( 'flexline_page_title', array( __CLASS__, 'flexline_page_title_shortcode' ) );
+    /**
+     * Initialize the shortcodes class.
+     *
+     * Registers the following shortcodes:
+     *
+     * - flexline_copyright_year
+     * - flexline_theme_docs
+     * - flexline_site_name
+     * - flexline_page_title
+     */
+    public static function init()
+    {
+        add_shortcode('flexline_copyright_year', array(__CLASS__, 'flexline_copyright_year_shortcode'));
+        add_shortcode('flexline_theme_docs', array(__CLASS__, 'flexline_theme_docs_shortcode'));
+        add_shortcode('flexline_site_name', array(__CLASS__, 'flexline_site_name_shortcode'));
+        add_shortcode('flexline_page_title', array(__CLASS__, 'flexline_page_title_shortcode'));
     }
 
     /**
@@ -27,7 +50,8 @@ class Shortcodes {
      *        To display a range from a specific year to the current year: [flexline_copyright_year starting_year="2015"]
      *        To customize the separator in the range: [flexline_copyright_year starting_year="2010" separator=" to "]
      */
-    public static function flexline_copyright_year_shortcode( $atts ) {
+    public static function flexline_copyright_year_shortcode($atts)
+    {
         // Setup defaults.
         $args = shortcode_atts(
             array(
@@ -36,15 +60,15 @@ class Shortcodes {
             ),
             $atts
         );
-    
-        $current_year = gmdate( 'Y' );
-    
+
+        $current_year = gmdate('Y');
+
         // Return current year if starting year is empty.
-        if ( ! $args['starting_year'] ) {
+        if (! $args['starting_year']) {
             return $current_year;
         }
-    
-        return esc_html( $args['starting_year'] . $args['separator'] . $current_year );
+
+        return esc_html($args['starting_year'] . $args['separator'] . $current_year);
     }
 
     /**
@@ -52,7 +76,8 @@ class Shortcodes {
      *
      * @return string HTML content for the docs link.
      */
-    public static function flexline_docs_shortcode() {
+    public static function flexline_docs_shortcode()
+    {
         $flexline_docs = '';
 
         return $flexline_docs;
@@ -63,8 +88,9 @@ class Shortcodes {
      *
      * @return string Documentation tab markup or empty string if unavailable.
      */
-    public static function flexline_theme_docs_shortcode() {
-        if ( ! function_exists( 'FlexLine\\flexline_render_documentation_tab' ) ) {
+    public static function flexline_theme_docs_shortcode()
+    {
+        if (! function_exists('FlexLine\\flexline_render_documentation_tab')) {
             return '';
         }
 
@@ -80,11 +106,12 @@ class Shortcodes {
      * @return string The formatted site name.
      * @usage [flexline_site_name] this is for use primarily in starter content.
      */
-    public static function flexline_site_name_shortcode() {
+    public static function flexline_site_name_shortcode()
+    {
         // Start output buffering.
         ob_start();
         // Get the site name.
-        $site_name = get_bloginfo( 'name' ) ? esc_html( get_bloginfo( 'name' ) ): 'flexline';
+        $site_name = get_bloginfo('name') ? esc_html(get_bloginfo('name')) : 'flexline';
         // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
         echo  $site_name; // Escaped earlier.
         // Return the buffered content.
@@ -97,7 +124,8 @@ class Shortcodes {
      * @return string The formatted page title.
      * @usage [flexline_page_title] this is for use primarily in starter content.
      */
-    public static function flexline_page_title_shortcode() {
+    public static function flexline_page_title_shortcode()
+    {
         // Get the page title.
         $page_title = get_the_title();
 
@@ -108,23 +136,23 @@ class Shortcodes {
         // Return the buffered content.
         return ob_get_clean();
     }
-
 }
 
 /**
  * Enqueue assets for the theme docs shortcode.
  */
-function enqueue_theme_docs_assets() {
-    if ( ! is_singular() ) {
+function enqueue_theme_docs_assets()
+{
+    if (! is_singular()) {
         return;
     }
 
     $post = get_post();
-    if ( ! $post || ! has_shortcode( $post->post_content, 'flexline_theme_docs' ) ) {
+    if (! $post || ! has_shortcode($post->post_content, 'flexline_theme_docs')) {
         return;
     }
 
-    wp_enqueue_style( 'dashicons' );
+    wp_enqueue_style('dashicons');
 
     $theme_uri = get_template_directory_uri();
     wp_enqueue_script(
@@ -137,10 +165,10 @@ function enqueue_theme_docs_assets() {
     wp_enqueue_script(
         'flexline-theme-docs',
         $theme_uri . '/assets/js/theme-docs.js',
-        array( 'flexline-tablesort' ),
+        array('flexline-tablesort'),
         null,
         true
     );
 }
 
-add_action( 'wp_enqueue_scripts', __NAMESPACE__ . '\\enqueue_theme_docs_assets' );
+add_action('wp_enqueue_scripts', __NAMESPACE__ . '\\enqueue_theme_docs_assets');
