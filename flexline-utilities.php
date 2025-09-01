@@ -37,6 +37,7 @@ require_once FLEXLINE_UTILITIES_PLUGIN_DIR . 'includes/class-utilities.php';
 require_once FLEXLINE_UTILITIES_PLUGIN_DIR . 'includes/functions/get-logo-url.php';
 require_once FLEXLINE_UTILITIES_PLUGIN_DIR . 'includes/security.php';
 require_once FLEXLINE_UTILITIES_PLUGIN_DIR . 'includes/hooks/add-og-tags.php';
+require_once FLEXLINE_UTILITIES_PLUGIN_DIR . 'includes/features.php';
 
 // Activation and deactivation hooks.
 register_activation_hook(__FILE__, 'FlexLine_Utilities\activate');

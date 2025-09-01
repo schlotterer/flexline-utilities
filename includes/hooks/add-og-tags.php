@@ -15,11 +15,11 @@ namespace FlexLine;
  * @return string An empty string if Yoast is not found, otherwise a block of meta tag HTML.
  */
 function add_og_tags() {
-	// Bail if Yoast is installed, since it will handle things.
-	if ( class_exists( 'WPSEO_Options' ) ) {
+	// Respect settings.
+	$opts = \FlexLine\flexline_utilities_get_options();
+	if ( ! empty( $opts['og_skip_if_yoast'] ) && class_exists( 'WPSEO_Options' ) ) {
 		return '';
 	}
-
 	// Set a post global on single posts. This avoids grabbing content from the first post on an archive page.
 	if ( is_singular() ) {
 		global $post;
@@ -144,4 +144,14 @@ function add_og_tags() {
 	<?php
 }
 
-add_action( 'wp_head', __NAMESPACE__ . '\add_og_tags' );
+/**
+ * Register OG tags conditionally.
+ */
+function flexline_register_og_tags() {
+	$opts = flexline_utilities_get_options();
+
+	if ( ! empty( $opts['enable_og_tags'] ) ) {
+		add_action( 'wp_head', __NAMESPACE__ . '\add_og_tags' );
+	}
+}
+add_action( 'init', __NAMESPACE__ . '\flexline_register_og_tags' );
