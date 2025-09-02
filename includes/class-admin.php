@@ -12,6 +12,7 @@ class Admin {
 		'remove_generator'     => 1,
 		'disable_xmlrpc'       => 1,
 		'rest_cors_allow_all'  => 0,
+        'disable_all_comments'     => 0,
 	);
 
 	public static function init() {
@@ -129,6 +130,28 @@ class Admin {
 			},
 			'flexline_utilities'
 		);
+        // --- DISCUSSION SECTION (fields printed directly) ---
+        add_settings_section(
+            'flexline_utilities_section_discussion',
+            'Discussion Utilities',
+            function () {
+                $options = self::get_options(); // already merges defaults
+                $val = ! empty( $options['disable_all_comments'] ) ? 1 : 0;
+                ?>
+                <p>
+                  <label>
+                    <input type="checkbox"
+                      name="flexline_utilities[disable_all_comments]"
+                      value="1" <?php checked( $val, 1 ); ?> />
+                    <strong>Disable Comments Sitewide</strong>
+                  </label><br />
+                  <span class="description">Removes all comment functionality and UI: closes comments & pings, hides existing comments, removes admin menu & dashboard widget, strips REST endpoints, and removes the admin bar comments icon.</span>
+                </p>
+                <?php
+            },
+            'flexline_utilities'
+        );
+
 	}
 
 	/**
@@ -141,6 +164,7 @@ class Admin {
 			'remove_generator',
 			'disable_xmlrpc',
 			'rest_cors_allow_all',
+            'disable_all_comments',
 		);
 		$sanitized = array();
 		foreach ( $keys as $k ) {
